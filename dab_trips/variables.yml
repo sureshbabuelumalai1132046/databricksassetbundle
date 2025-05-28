@@ -1,0 +1,23 @@
+#### This is a separate variables file for the Databricks asset bundle.  
+variables:
+  root_path:
+    description: Root path for deployment files.
+    default: /Users/service-account/${bundle.target}/asset_bundle/.bundle/${bundle.name}
+  service_principal_name:
+    description: The service principal name to use for `run_as`.
+    default: service-account-${bundle.target}
+
+targets:
+  dev:
+    variables:
+      service_principal_name: 84e70def-a551-4599-bf6e-ab9f3698008a
+
+  qa:
+    variables:
+      root_path: /Users/<service_principal_name>/qa/asset_bundle/.bundle/${bundle.name}/${bundle.target}
+      service_principal_name: 84e70def-a551-4599-bf6e-ab9f3698008a
+
+  prod:
+    variables:
+      root_path: /Users/<service_principal_name>/prod/asset_bundle/.bundle/${bundle.name}/${bundle.target}
+      service_principal_name: 84e70def-a551-4599-bf6e-ab9f3698008a
