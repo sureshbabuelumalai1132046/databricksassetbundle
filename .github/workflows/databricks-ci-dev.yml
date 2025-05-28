@@ -2,7 +2,7 @@ name: CI/CD Pipeline for Databricks Bundle
 
 on:
   pull_request:
-   branches:
+    branches:
       - main
   push:
     branches: 
@@ -10,13 +10,13 @@ on:
   workflow_dispatch:
     inputs:
       env:
-        description: 'Deployment environment (dev,prod)'
+        description: 'Deployment environment (dev or prod)'
         required: true
-        default: 'dev'
+        default: 'non-prod'
 
 jobs:
-  validate:
-    name: Asset Bundle Pipeline
+  validate-and-deploy:
+    name: Deploy to Databricks (${{ github.event.inputs.env || 'auto' }})
     runs-on: ubuntu-latest
 
     steps:
@@ -24,9 +24,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.13'
+          python-version: '3.11'
 
       - name: Install dependencies
         run: |
@@ -39,32 +39,36 @@ jobs:
       - name: Determine Environment
         id: set-env
         run: |
-          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "env=${{ github.event.inputs.env }}" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
             echo "env=dev" >> $GITHUB_OUTPUT
           elif [[ "${{ github.event_name }}" == "push" ]]; then
             echo "env=prod" >> $GITHUB_OUTPUT
           fi
 
-      - name: Set Environment Secrets
+      - name: Load Environment Secrets
         run: |
           ENV="${{ steps.set-env.outputs.env }}"
           echo "Selected Environment: $ENV"
-
           echo "DATABRICKS_BUNDLE_ENV=$ENV" >> $GITHUB_ENV
 
           if [[ "$ENV" == "dev" ]]; then
-            echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_HOST }}" >> $GITHUB_ENV
-            echo "DATABRICKS_CLIENT_ID=${{ secrets.DATABRICKS_CLIENT_ID }}" >> $GITHUB_ENV
-            echo "DATABRICKS_CLIENT_SECRET=${{ secrets.DATABRICKS_CLIENT_SECRET }}" >> $GITHUB_ENV
-            echo "DATABRICKS_TENANT_ID=${{ secrets.DATABRICKS_TENANT_ID }}" >> $GITHUB_ENV
+            echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_DEV_HOST }}" >> $GITHUB_ENV
+            echo "DATABRICKS_CLIENT_ID=${{ secrets.DATABRICKS_DEV_CLIENT_ID }}" >> $GITHUB_ENV
+            echo "DATABRICKS_CLIENT_SECRET=${{ secrets.DATABRICKS_DEV_CLIENT_SECRET }}" >> $GITHUB_ENV
+            echo "DATABRICKS_TENANT_ID=${{ secrets.DATABRICKS_DEV_TENANT_ID }}" >> $GITHUB_ENV
           elif [[ "$ENV" == "prod" ]]; then
-            echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_HOST }}" >> $GITHUB_ENV
-            echo "DATABRICKS_CLIENT_ID=${{ secrets.DATABRICKS_CLIENT_ID }}" >> $GITHUB_ENV
-            echo "DATABRICKS_CLIENT_SECRET=${{ secrets.DATABRICKS_CLIENT_SECRET }}" >> $GITHUB_ENV
-            echo "DATABRICKS_TENANT_ID=${{ secrets.DATABRICKS_TENANT_ID }}" >> $GITHUB_ENV
+            echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_PROD_HOST }}" >> $GITHUB_ENV
+            echo "DATABRICKS_CLIENT_ID=${{ secrets.DATABRICKS_PROD_CLIENT_ID }}" >> $GITHUB_ENV
+            echo "DATABRICKS_CLIENT_SECRET=${{ secrets.DATABRICKS_PROD_CLIENT_SECRET }}" >> $GITHUB_ENV
+            echo "DATABRICKS_TENANT_ID=${{ secrets.DATABRICKS_PROD_TENANT_ID }}" >> $GITHUB_ENV
+          else
+            echo "Unsupported environment: $ENV"
+            exit 1
           fi
 
-      - name: "Validate and Deploy Bundle to ${{ steps.set-env.outputs.env }} environment"
+      - name: Validate and Deploy Bundle
         run: |
           cd dab_trips
           databricks bundle validate
