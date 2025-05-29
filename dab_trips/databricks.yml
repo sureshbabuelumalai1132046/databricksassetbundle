@@ -1,7 +1,7 @@
 # This is a Databricks asset bundle definition for dab_trips.
 # See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
 bundle:
-  name: databricks_bundle_health-ai
+  name: dab_trips_bundles
   #uuid: fb252316-6d3a-48cb-9a33-591cffc5661e
 
 include:
@@ -17,14 +17,14 @@ targets:
     default: true
     workspace:
       #host: "{{env.DATABRICKS_HOST}}"
-      host: https://adb-1397210451443391.11.azuredatabricks.net/
+      host: https://adb-1397210451443391.11.azuredatabricks.net
       #root_path: ~/Users/{{env.DATABRICKS_CLIENT_ID}/.bundle/${bundle.name}/${bundle.target}
       #root_path: /Users/${DATABRICKS_CLIENT_ID}/.bundle/${bundle.name}/${bundle.target}
 
   prod:
     mode: production
     workspace:
-      host: https://adb-1397210451443391.11.azuredatabricks.net/
+      host: https://adb-1397210451443391.11.azuredatabricks.net
       root_path: /Workspace/Users/b4072dca-13f5-48ec-9090-76a9ce6555ea/.bundle/${bundle.name}/${bundle.target}
       #root_path: /.bundle/${bundle.name}/${bundle.target}
       #host: ${secrets.DATABRICKS_HOST}
