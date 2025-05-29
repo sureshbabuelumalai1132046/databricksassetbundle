@@ -13,17 +13,17 @@ targets:
     mode: development
     default: true
     workspace:
-      host: ${secrets.DATABRICKS_HOST}
+      host: ${secrets.cicd-secrets.DATABRICKS_HOST}
 
   prod:
     mode: production
     workspace:
       host: ${secrets.DATABRICKS_HOST}
-      root_path: /Workspace/Users/${secrets.DATABRICKS_CLIENT_ID}/.bundle/${bundle.name}/${bundle.target}
+      root_path: /Workspace/Users/${secrets.cicd-secrets.DATABRICKS_CLIENT_ID}/.bundle/${bundle.name}/${bundle.target}
     run_as:  
-      service_principal_name: "${secrets.DATABRICKS_CLIENT_ID}"
+      service_principal_name: "${secrets.cicd-secrets.DATABRICKS_CLIENT_ID}"
     permissions:
       - level: CAN_MANAGE
-        service_principal_name: "${secrets.DATABRICKS_CLIENT_ID}"
+        service_principal_name: "${secrets.cicd-secrets.DATABRICKS_CLIENT_ID}"
       - level: CAN_VIEW
         group_name: dataops_admins
