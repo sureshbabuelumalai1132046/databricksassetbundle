@@ -3,6 +3,7 @@ resources:
   pipelines:
     dab_trips_pipeline:
       name: circana-monthly-job
+      display_name: circana-monthly-job
       ## Specify the 'catalog' field to configure this pipeline to make use of Unity Catalog:
       # catalog: catalog_name
       schema: dab_trips_${bundle.target}
