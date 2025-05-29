@@ -15,8 +15,36 @@ resources:
 
         - task_key: main_task
           depends_on:
-            - task_key: refresh_pipeline
+            - task_key: notebook_task
           job_cluster_key: Extra_Small_Cluster
+          python_wheel_task:
+            package_name: dab_trips
+            entry_point: main
 
-      # This references the job_cluster_definition defined elsewhere in the file
-      <<: *job_cluster_definition
+      job_clusters:
+        - job_cluster_key: Extra_Small_Cluster
+          new_cluster:
+            num_workers: 0
+            node_type_id: 'Standard_D3_v2'
+            driver_node_type_id: 'Standard_D3_v2'
+            spark_version: '15.4.x-scala2.12'
+            spark_conf:
+              'spark.executor.memory': '2g'
+            autotermination_minutes: 10
+            enable_elastic_disk: true
+            single_user_name: ${workspace.current_user.userName}
+            policy_id: '0001474D7F648E82'
+            enable_local_disk_encryption: false
+            data_security_mode: SINGLE_USER
+            runtime_engine: STANDARD
+            custom_tags:
+              environmentname: non-prod
+              product: healthai
+              costcenter: 696556
+              productowner: sureshbabu.elumalai@tredence
+            autoscale:
+              min_workers: 1
+              max_workers: 1
+            init_scripts:
+              - workspace:
+                  destination: ../../src/infra/install.sh
