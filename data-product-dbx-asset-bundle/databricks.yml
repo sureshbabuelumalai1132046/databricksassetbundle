@@ -7,7 +7,6 @@ include:
   - src/**/*.ipynb
   - dist/*.whl
 email_notifications: sureshbabu.elumalai@tredence.com
-    email_notifications:
 job_cluster: &job_cluster
   job_clusters:
     - job_cluster_key: Extra_Small_Cluster
