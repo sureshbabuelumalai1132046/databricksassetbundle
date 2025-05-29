@@ -1,0 +1,5 @@
+resources:
+  dashboards:
+    sales_dashboard:
+      name: "Sales Overview"
+      definition_path: "dashboards/sales_overview/sales-overview.yml"

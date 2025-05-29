@@ -5,7 +5,7 @@ bundle:
   #uuid: fb252316-6d3a-48cb-9a33-591cffc5661e
 
 include:
-  - resources/*.yml
+  - resources/***/*.yml
 
 targets:
   non-prod:
