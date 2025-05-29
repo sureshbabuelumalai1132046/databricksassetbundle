@@ -1,14 +1,14 @@
 # This is a Databricks asset bundle definition for dab_trips.
 # See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
 bundle:
-  name: dab_trips_bundles
+  name: databricks_bundle_health-ai
   #uuid: fb252316-6d3a-48cb-9a33-591cffc5661e
 
 include:
   - resources/*.yml
 
 targets:
-  dev:
+  non-prod:
     # The default target uses 'mode: development' to create a development copy.
     # - Deployed resources get prefixed with '[dev my_user_name]'
     # - Any job schedules and triggers are paused by default.
@@ -17,24 +17,24 @@ targets:
     default: true
     workspace:
       #host: "{{env.DATABRICKS_HOST}}"
-      host: https://adb-2137024003234611.11.azuredatabricks.net
+      host: https://adb-1397210451443391.11.azuredatabricks.net/
       #root_path: ~/Users/{{env.DATABRICKS_CLIENT_ID}/.bundle/${bundle.name}/${bundle.target}
       #root_path: /Users/${DATABRICKS_CLIENT_ID}/.bundle/${bundle.name}/${bundle.target}
 
   prod:
     mode: production
     workspace:
-      host: https://adb-2137024003234611.11.azuredatabricks.net
-      root_path: /Workspace/Users/1332a133-9552-4944-a877-4fcc838c50cf/.bundle/${bundle.name}/${bundle.target}
+      host: https://adb-1397210451443391.11.azuredatabricks.net/
+      root_path: /Workspace/Users/b4072dca-13f5-48ec-9090-76a9ce6555ea/.bundle/${bundle.name}/${bundle.target}
       #root_path: /.bundle/${bundle.name}/${bundle.target}
       #host: ${secrets.DATABRICKS_HOST}
       # We explicitly deploy to /Workspace/Users/cxk04781@ucmo.edu to make sure we only have a single copy.
     run_as:  
-      service_principal_name: "1332a133-9552-4944-a877-4fcc838c50cf"
+      service_principal_name: "b4072dca-13f5-48ec-9090-76a9ce6555ea"
       #user_name: 4e70def-a551-4599-bf6e-ab9f3698008a
     permissions:
       - level: CAN_MANAGE
         #group_name: Databricks_Admin
-        service_principal_name: "1332a133-9552-4944-a877-4fcc838c50cf"
+        service_principal_name: "b4072dca-13f5-48ec-9090-76a9ce6555ea"
       - level: CAN_VIEW
         group_name: Databricks_DE_PROD
