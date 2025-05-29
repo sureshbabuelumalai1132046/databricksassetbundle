@@ -18,7 +18,7 @@ resources:
         - task_key: notebook_task
           job_cluster_key: job_cluster
           notebook_task:
-            notebook_path: ../src/notebook.ipynb
+            notebook_path: .../src/notebook.ipynb
 
         - task_key: refresh_pipeline
           depends_on:
@@ -37,7 +37,7 @@ resources:
             # By default we just include the .whl file generated for the dab_trips package.
             # See https://docs.databricks.com/dev-tools/bundles/library-dependencies.html
             # for more information on how to add other libraries.
-            - whl: ../dist/*.whl
+            - whl: .../dist/*.whl
 
       job_clusters:
         - job_cluster_key: job_cluster
