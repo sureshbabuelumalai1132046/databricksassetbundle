@@ -5,15 +5,17 @@ include:
   - resources/**/*.yml
   - src/**/*.ipynb
   - dist/*.whl
+
 email_notifications: sureshbabu.elumalai@tredence.com
+
 job_cluster: &job_cluster
   job_clusters:
     - job_cluster_key: Extra_Small_Cluster
     - job_cluster_key: Small_Cluster
     - job_cluster_key: Medium_Cluster
     - job_cluster_key: Large_Cluster
-    
- targets:
+
+targets:
   non-prod:
     mode: development
     default: true
@@ -25,27 +27,27 @@ job_cluster: &job_cluster
     workspace:
       host: ${secrets.DATABRICKS_HOST}
       root_path: /Workspace/Users/b4072dca-13f5-48ec-9090-76a9ce6555ea/.bundle/${bundle.name}/${bundle.target}
-    run_as:  
+    run_as:
       service_principal_name: "b4072dca-13f5-48ec-9090-76a9ce6555ea"
     permissions:
       - level: CAN_MANAGE
         service_principal_name: "b4072dca-13f5-48ec-9090-76a9ce6555ea"
       - level: CAN_VIEW
         group_name: dataops_admins
-  
+
   job_clusters:
     - job_cluster_key: Extra_Small_Cluster
       new_cluster:
         num_workers: 0
         node_type_id: 'Standard_D3_v2'
         driver_node_type_id: 'Standard_D3_v2'
-        spark_version: '15.4.x-scala2.12'  # Adjust as per Azure Databricks release
+        spark_version: '15.4.x-scala2.12'
         spark_conf:
-            'spark.executor.memory': '2g'
+          'spark.executor.memory': '2g'
         autotermination_minutes: 10
         enable_elastic_disk: true
         single_user_name: ${workspace.current_user.userName}
-        policy_id: '0001474D7F648E82'  # Replace with a valid Azure cluster policy ID
+        policy_id: '0001474D7F648E82'
         enable_local_disk_encryption: false
         data_security_mode: SINGLE_USER
         runtime_engine: STANDARD
@@ -60,19 +62,18 @@ job_cluster: &job_cluster
         init_scripts:
           - workspace:
               destination: ../../src/infra/install.sh
-          
+
     - job_cluster_key: Small_Cluster
       new_cluster:
-        num_workers: 0
         node_type_id: 'Standard_D4_v3'
         driver_node_type_id: 'Standard_D4_v3'
-        spark_version: '15.4.x-scala2.12'  # Adjust as per Azure Databricks release
+        spark_version: '15.4.x-scala2.12'
         spark_conf:
-            'spark.executor.memory': '2g'
+          'spark.executor.memory': '2g'
         autotermination_minutes: 10
         enable_elastic_disk: true
         single_user_name: ${workspace.current_user.userName}
-        policy_id: '0001474D7F648E82'  # Replace with a valid Azure cluster policy ID
+        policy_id: '0001474D7F648E82'
         enable_local_disk_encryption: false
         data_security_mode: SINGLE_USER
         runtime_engine: STANDARD
@@ -84,19 +85,18 @@ job_cluster: &job_cluster
         autoscale:
           min_workers: 1
           max_workers: 1
-          
+
     - job_cluster_key: Medium_Cluster
       new_cluster:
-        num_workers: 0
         node_type_id: 'Standard_D8_v3'
         driver_node_type_id: 'Standard_D8_v3'
-        spark_version: '15.4.x-scala2.12'  # Adjust as per Azure Databricks release
+        spark_version: '15.4.x-scala2.12'
         spark_conf:
-            'spark.executor.memory': '2g'
+          'spark.executor.memory': '2g'
         autotermination_minutes: 10
         enable_elastic_disk: true
         single_user_name: ${workspace.current_user.userName}
-        policy_id: '0001474D7F648E82'  # Replace with a valid Azure cluster policy ID
+        policy_id: '0001474D7F648E82'
         enable_local_disk_encryption: false
         data_security_mode: SINGLE_USER
         runtime_engine: STANDARD
@@ -111,16 +111,15 @@ job_cluster: &job_cluster
 
     - job_cluster_key: Large_Cluster
       new_cluster:
-        num_workers: 0
         node_type_id: 'Standard_D16_v'
         driver_node_type_id: 'Standard_D16_v'
-        spark_version: '15.4.x-scala2.12'  # Adjust as per Azure Databricks release
+        spark_version: '15.4.x-scala2.12'
         spark_conf:
-            'spark.executor.memory': '2g'
+          'spark.executor.memory': '2g'
         autotermination_minutes: 10
         enable_elastic_disk: true
         single_user_name: ${workspace.current_user.userName}
-        policy_id: '0001474D7F648E82'  # Replace with a valid Azure cluster policy ID
+        policy_id: '0001474D7F648E82'
         enable_local_disk_encryption: false
         data_security_mode: SINGLE_USER
         runtime_engine: STANDARD
