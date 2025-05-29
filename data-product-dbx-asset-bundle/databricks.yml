@@ -6,6 +6,13 @@ include:
   - src/**/*.ipynb
   - dist/*.whl
 
+job_cluster: &job_cluster_definition
+  job_clusters:
+    - job_cluster_key: Extra_Small_Cluster
+    - job_cluster_key: Small_Cluster
+    - job_cluster_key: Medium_Cluster
+    - job_cluster_key: Large_Cluster
+    
 targets:
   non-prod:
     mode: development
@@ -27,6 +34,7 @@ targets:
         group_name: dataops_admins
         
 job_cluster: &job_cluster_definition
+
   job_clusters:
     - job_cluster_key: Extra_Small_Cluster
       new_cluster:

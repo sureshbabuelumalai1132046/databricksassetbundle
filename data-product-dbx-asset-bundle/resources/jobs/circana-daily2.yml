@@ -13,13 +13,6 @@ resources:
           notebook_task:
             notebook_path: ../../src/notebook.ipynb
 
-        - task_key: refresh_pipeline
-          job_cluster_key: Extra_Small_Cluster
-          depends_on:
-            - task_key: notebook_task
-          pipeline_task:
-            pipeline_id: ${resources.pipelines.dab_trips_pipeline.id}
-
         - task_key: main_task
           depends_on:
             - task_key: refresh_pipeline
