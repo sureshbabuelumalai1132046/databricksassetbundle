@@ -6,6 +6,8 @@ bundle:
 
 include:
   - resources/**/*.yml
+  - src/**/*.ipynb
+  - dist/*.whl
 targets:
   non-prod:
     # The default target uses 'mode: development' to create a development copy.
