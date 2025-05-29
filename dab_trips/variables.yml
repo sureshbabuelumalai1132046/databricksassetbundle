@@ -8,16 +8,16 @@ variables:
     default: service-account-${bundle.target}
 
 targets:
-  dev:
+  non-prod:
     variables:
-      service_principal_name: 84e70def-a551-4599-bf6e-ab9f3698008a
+      service_principal_name: b4072dca-13f5-48ec-9090-76a9ce6555ea
 
   qa:
     variables:
       root_path: /Users/<service_principal_name>/qa/asset_bundle/.bundle/${bundle.name}/${bundle.target}
-      service_principal_name: 84e70def-a551-4599-bf6e-ab9f3698008a
+      service_principal_name: b4072dca-13f5-48ec-9090-76a9ce6555ea
 
   prod:
     variables:
       root_path: /Users/<service_principal_name>/prod/asset_bundle/.bundle/${bundle.name}/${bundle.target}
-      service_principal_name: 84e70def-a551-4599-bf6e-ab9f3698008a
+      service_principal_name: b4072dca-13f5-48ec-9090-76a9ce6555ea
