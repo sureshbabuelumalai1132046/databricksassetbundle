@@ -34,6 +34,4 @@ resources:
             package_name: dab_trips
             entry_point: main
 
-      job_clusters:
-        - job_cluster_key: Extra_Small_Cluster
-                             
+      <<: *job_cluster                       
