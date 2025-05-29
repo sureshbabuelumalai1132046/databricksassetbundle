@@ -30,7 +30,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd dab_trips
+          cd data-product-dbx-asset-bundle
           pip install -r requirements-dev.txt
 
       - name: Setup Databricks CLI
@@ -70,6 +70,6 @@ jobs:
 
       - name: Validate and Deploy Bundle
         run: |
-          cd dab_trips
+          cd data-product-dbx-asset-bundle
           databricks bundle validate
           databricks bundle deploy --target=$DATABRICKS_BUNDLE_ENV --auto-approve

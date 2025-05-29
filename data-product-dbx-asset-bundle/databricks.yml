@@ -1,6 +1,6 @@
 
 bundle:
-  name: dab_trips_bundles
+  name: data-product-dbx-asset-bundle
 
 include:
   - resources/**/*.yml
