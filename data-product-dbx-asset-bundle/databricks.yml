@@ -6,13 +6,6 @@ include:
   - src/**/*.ipynb
   - dist/*.whl
 
-job_cluster: &job_cluster
-  job_clusters:
-    - job_cluster_key: Extra_Small_Cluster
-    - job_cluster_key: Small_Cluster
-    - job_cluster_key: Medium_Cluster
-    - job_cluster_key: Large_Cluster
-
 targets:
   non-prod:
     mode: development
@@ -32,7 +25,8 @@ targets:
         service_principal_name: "b4072dca-13f5-48ec-9090-76a9ce6555ea"
       - level: CAN_VIEW
         group_name: dataops_admins
-
+        
+job_cluster: &job_cluster_definition
   job_clusters:
     - job_cluster_key: Extra_Small_Cluster
       new_cluster:

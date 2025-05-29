@@ -34,4 +34,4 @@ resources:
             package_name: dab_trips
             entry_point: main
 
-      <<: *job_cluster                       
+ <<: *job_cluster_definition                    
