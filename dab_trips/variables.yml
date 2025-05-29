@@ -21,3 +21,4 @@ targets:
     variables:
       root_path: /Users/<service_principal_name>/prod/asset_bundle/.bundle/${bundle.name}/${bundle.target}
       service_principal_name: b4072dca-13f5-48ec-9090-76a9ce6555ea
+
