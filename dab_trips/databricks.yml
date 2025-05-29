@@ -1,8 +1,6 @@
-# This is a Databricks asset bundle definition for dab_trips.
-# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+
 bundle:
   name: dab_trips_bundles
-  #uuid: fb252316-6d3a-48cb-9a33-591cffc5661e
 
 include:
   - resources/**/*.yml
@@ -13,17 +11,17 @@ targets:
     mode: development
     default: true
     workspace:
-      host: ${secrets.cicd-secrets.DATABRICKS_HOST}
+      host: https://adb-1397210451443391.11.azuredatabricks.net
 
   prod:
     mode: production
     workspace:
       host: ${secrets.DATABRICKS_HOST}
-      root_path: /Workspace/Users/${secrets.cicd-secrets.DATABRICKS_CLIENT_ID}/.bundle/${bundle.name}/${bundle.target}
+      root_path: /Workspace/Users/b4072dca-13f5-48ec-9090-76a9ce6555ea/.bundle/${bundle.name}/${bundle.target}
     run_as:  
-      service_principal_name: "${secrets.cicd-secrets.DATABRICKS_CLIENT_ID}"
+      service_principal_name: "b4072dca-13f5-48ec-9090-76a9ce6555ea"
     permissions:
       - level: CAN_MANAGE
-        service_principal_name: "${secrets.cicd-secrets.DATABRICKS_CLIENT_ID}"
+        service_principal_name: "b4072dca-13f5-48ec-9090-76a9ce6555ea"
       - level: CAN_VIEW
         group_name: dataops_admins
