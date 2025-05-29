@@ -27,4 +27,3 @@ targets:
         service_principal_name: "${secrets.DATABRICKS_CLIENT_ID}"
       - level: CAN_VIEW
         group_name: dataops_admins
-   
