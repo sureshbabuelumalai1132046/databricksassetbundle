@@ -33,7 +33,7 @@ resources:
             autotermination_minutes: 10
             enable_elastic_disk: true
             single_user_name: ${workspace.current_user.userName}
-            policy_id: '0001474D7F648E82'
+            policy_id: '0015280F66B90C34'
             enable_local_disk_encryption: false
             data_security_mode: SINGLE_USER
             runtime_engine: STANDARD
