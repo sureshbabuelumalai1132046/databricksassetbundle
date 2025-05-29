@@ -54,15 +54,15 @@ jobs:
           echo "DATABRICKS_BUNDLE_ENV=$ENV" >> $GITHUB_ENV
 
           if [[ "$ENV" == "non-prod" ]]; then
-            echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_PROD_HOST }}" >> $GITHUB_ENV
-            echo "DATABRICKS_CLIENT_ID=${{ secrets.DATABRICKS_PROD_CLIENT_ID }}" >> $GITHUB_ENV
-            echo "DATABRICKS_CLIENT_SECRET=${{ secrets.DATABRICKS_PROD_CLIENT_SECRET }}" >> $GITHUB_ENV
+            echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_HOST }}" >> $GITHUB_ENV
+            echo "DATABRICKS_CLIENT_ID=${{ secrets.DATABRICKS_CLIENT_ID }}" >> $GITHUB_ENV
+            echo "DATABRICKS_CLIENT_SECRET=${{ secrets.DATABRICKS_CLIENT_SECRET }}" >> $GITHUB_ENV
             echo "DATABRICKS_TENANT_ID=${{ secrets.DATABRICKS_PROD_TENANT_ID }}" >> $GITHUB_ENV
           elif [[ "$ENV" == "prod" ]]; then
-            echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_PROD_HOST }}" >> $GITHUB_ENV
-            echo "DATABRICKS_CLIENT_ID=${{ secrets.DATABRICKS_PROD_CLIENT_ID }}" >> $GITHUB_ENV
-            echo "DATABRICKS_CLIENT_SECRET=${{ secrets.DATABRICKS_PROD_CLIENT_SECRET }}" >> $GITHUB_ENV
-            echo "DATABRICKS_TENANT_ID=${{ secrets.DATABRICKS_PROD_TENANT_ID }}" >> $GITHUB_ENV
+            echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_HOST }}" >> $GITHUB_ENV
+            echo "DATABRICKS_CLIENT_ID=${{ secrets.DATABRICKS_CLIENT_ID }}" >> $GITHUB_ENV
+            echo "DATABRICKS_CLIENT_SECRET=${{ secrets.DATABRICKS_CLIENT_SECRET}}" >> $GITHUB_ENV
+            echo "DATABRICKS_TENANT_ID=${{ secrets.DATABRICKS_TENANT_ID }}" >> $GITHUB_ENV
           else
             echo "Unsupported environment: $ENV"
             exit 1
