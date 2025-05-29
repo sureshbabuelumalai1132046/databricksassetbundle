@@ -1,0 +1,27 @@
+
+bundle:
+  name: data-product-dbx-asset-bundle
+
+include:
+  - resources/**/*.yml
+  - src/**/*.ipynb
+  - dist/*.whl
+targets:
+  non-prod:
+    mode: development
+    default: true
+    workspace:
+      host: https://adb-1397210451443391.11.azuredatabricks.net
+
+  prod:
+    mode: production
+    workspace:
+      host: ${secrets.DATABRICKS_HOST}
+      root_path: /Workspace/Users/b4072dca-13f5-48ec-9090-76a9ce6555ea/.bundle/${bundle.name}/${bundle.target}
+    run_as:  
+      service_principal_name: "b4072dca-13f5-48ec-9090-76a9ce6555ea"
+    permissions:
+      - level: CAN_MANAGE
+        service_principal_name: "b4072dca-13f5-48ec-9090-76a9ce6555ea"
+      - level: CAN_VIEW
+        group_name: dataops_admins
