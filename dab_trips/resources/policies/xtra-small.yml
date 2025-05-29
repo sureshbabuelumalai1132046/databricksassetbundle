@@ -1,0 +1,19 @@
+resources:
+  cluster_policies:
+    standard_policy:
+      name: "Standard-photon-policy"
+      definition:
+        spark_version:
+          type: fixed
+          value: "13.3.x-scala2.12"
+        node_type_id:
+          type: fixed
+          value: "Standard_DS3_v2"
+        autotermination_minutes:
+          type: fixed
+          value: 30
+        num_workers:
+          type: range
+          minValue: 1
+          maxValue: 4
+      definition_overrides: {}
