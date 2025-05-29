@@ -37,4 +37,4 @@ targets:
         #group_name: Databricks_Admin
         service_principal_name: "b4072dca-13f5-48ec-9090-76a9ce6555ea"
       - level: CAN_VIEW
-        group_name: Databricks_DE_PROD
+        group_name: admins
