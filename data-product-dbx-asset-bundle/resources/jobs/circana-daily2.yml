@@ -8,10 +8,6 @@ resources:
           interval: 1
           unit: DAYS
 
-      # email_notifications:
-      #   on_failure:
-      #     - your_email@example.com
-
       tasks:
         - task_key: notebook_task
           job_cluster_key: Extra_Small_Cluster
@@ -32,4 +28,5 @@ resources:
             package_name: dab_trips
             entry_point: main
 
+      # This references the job_cluster_definition defined elsewhere in the file
       <<: *job_cluster_definition
