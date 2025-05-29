@@ -5,12 +5,12 @@ on:
     branches:
       - main
   push:
-    branches: 
+    branches:
       - main
   workflow_dispatch:
     inputs:
       env:
-        description: 'Deployment environment (Non-prod or prod)'
+        description: 'Deployment environment (non-prod or prod)'
         required: true
         default: 'non-prod'
 
@@ -43,7 +43,7 @@ jobs:
             echo "env=${{ github.event.inputs.env }}" >> $GITHUB_OUTPUT
           elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
             echo "env=non-prod" >> $GITHUB_OUTPUT
-          elif [[ "${{ github.event_name }}" == "push" ]]; then
+          elif [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/main" ]]; then
             echo "env=prod" >> $GITHUB_OUTPUT
           fi
 
@@ -57,11 +57,11 @@ jobs:
             echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_HOST }}" >> $GITHUB_ENV
             echo "DATABRICKS_CLIENT_ID=${{ secrets.DATABRICKS_CLIENT_ID }}" >> $GITHUB_ENV
             echo "DATABRICKS_CLIENT_SECRET=${{ secrets.DATABRICKS_CLIENT_SECRET }}" >> $GITHUB_ENV
-            echo "DATABRICKS_TENANT_ID=${{ secrets.DATABRICKS_PROD_TENANT_ID }}" >> $GITHUB_ENV
+            echo "DATABRICKS_TENANT_ID=${{ secrets.DATABRICKS_TENANT_ID }}" >> $GITHUB_ENV
           elif [[ "$ENV" == "prod" ]]; then
             echo "DATABRICKS_HOST=${{ secrets.DATABRICKS_HOST }}" >> $GITHUB_ENV
             echo "DATABRICKS_CLIENT_ID=${{ secrets.DATABRICKS_CLIENT_ID }}" >> $GITHUB_ENV
-            echo "DATABRICKS_CLIENT_SECRET=${{ secrets.DATABRICKS_CLIENT_SECRET}}" >> $GITHUB_ENV
+            echo "DATABRICKS_CLIENT_SECRET=${{ secrets.DATABRICKS_CLIENT_SECRET }}" >> $GITHUB_ENV
             echo "DATABRICKS_TENANT_ID=${{ secrets.DATABRICKS_TENANT_ID }}" >> $GITHUB_ENV
           else
             echo "Unsupported environment: $ENV"
