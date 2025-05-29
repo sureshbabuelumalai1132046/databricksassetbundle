@@ -43,3 +43,6 @@ resources:
             autoscale:
                 min_workers: 1
                 max_workers: 1
+            init_scripts:
+                - workspace:
+                    destination: ../../src/infra/install.sh
