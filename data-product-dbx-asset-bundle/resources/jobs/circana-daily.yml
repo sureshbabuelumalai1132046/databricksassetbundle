@@ -16,7 +16,7 @@ resources:
 
       tasks:
         - task_key: notebook_task
-          job_cluster_key: job_cluster
+          job_cluster_key: Extra_Small_Cluster
           notebook_task:
             notebook_path: ../../src/notebook.ipynb
 
