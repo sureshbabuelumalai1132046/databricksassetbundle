@@ -29,7 +29,7 @@ resources:
         - task_key: main_task
           depends_on:
             - task_key: refresh_pipeline
-          job_cluster_key: job_cluster
+          job_cluster_key: Extra_Small_Cluster
           python_wheel_task:
             package_name: dab_trips
             entry_point: main
