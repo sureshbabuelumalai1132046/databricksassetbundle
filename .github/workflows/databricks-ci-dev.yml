@@ -18,7 +18,7 @@ jobs:
   validate-and-deploy:
     name: Deploy to Databricks (${{ github.event.inputs.env || 'auto' }})
     runs-on: ubuntu-latest
-
+    environment: ${{ github.event.inputs.env || 'non-prod' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
