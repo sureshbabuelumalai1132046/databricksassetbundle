@@ -6,7 +6,6 @@ bundle:
 
 include:
   - resources/**/*.yml
-
 targets:
   non-prod:
     # The default target uses 'mode: development' to create a development copy.
