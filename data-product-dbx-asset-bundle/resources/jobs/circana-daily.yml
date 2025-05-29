@@ -46,5 +46,4 @@ resources:
             init_scripts:
                 - workspace:
                     destination: ../../src/infra/install.sh
-                    
-              
+                             
